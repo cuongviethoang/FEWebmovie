@@ -1,0 +1,290 @@
+.containerProfile {
+    width: 100%;
+    padding-top: 5rem;
+    padding-bottom: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #242526;
+}
+
+.containerIntro {
+    position: relative;
+    width: 80%;
+}
+
+.containerIntro,
+.intro_top,
+.intro_top_img,
+.overlayImg {
+    border-radius: 12px;
+}
+
+.overlayImg {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 500px;
+    background-image: linear-gradient(to top, #10121c, transparent);
+}
+
+.intro_top_img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    filter: brightness(0.7);
+    object-position: 0 35%;
+    border-radius: 6px;
+}
+
+.intro_detailsUser {
+    position: absolute;
+    background-color: transparent;
+    top: 90%;
+    left: 6%;
+    display: flex;
+    align-items: center;
+}
+
+.circleImg {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 999px;
+    border-top: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #242526;
+}
+
+.userImg {
+    width: 195px;
+    height: 195px;
+    border-radius: 999px;
+    border: 1px solid #605c5c;
+}
+
+.circleCamera {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    bottom: 10%;
+    right: 5px;
+    background-color: #242526;
+    border-radius: 999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iconCamera {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.detailsUser_Name,
+.detailsUser_Email {
+    color: #fff;
+}
+
+.detailsUser {
+    margin-left: 16px;
+}
+
+.detailsUser_Name {
+    font-size: 2rem;
+}
+
+.detailsUser_Email {
+    font-size: 1.2rem;
+}
+
+/* Container Donors */
+
+.containerDonors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: #18191a;
+}
+
+.container {
+    width: 80%;
+}
+
+.Donors {
+    margin: 30px 0 20px 0;
+    color: #fff;
+    font-size: 2.5rem;
+    position: relative;
+}
+
+.Donors::before {
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 100%;
+    background-color: #f84b2f;
+    top: 0;
+    left: -5px;
+}
+
+.listDonors {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    list-style: none;
+    width: 100%;
+    padding: 20px;
+    gap: 20px;
+}
+
+.donorOne {
+    width: calc((100% - 60px) / 4);
+}
+
+.donorImgSize {
+    width: 100%;
+    height: 100%;
+    border-radius: 60px;
+}
+
+/* Footer */
+.footerMovie {
+    display: flex;
+    justify-content: center;
+    background-color: #242526;
+    padding-top: 50px;
+    height: 300px;
+}
+
+.footerHead {
+    font-size: 2.5rem;
+    color: #f84b2f;
+}
+
+.btn-user {
+    width: 180px;
+    height: 48px;
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.titleBtn {
+    color: #f84b2f;
+    font-size: 1rem;
+}
+
+.theName {
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 16px;
+}
+
+.listItemFoot {
+    list-style: none;
+    color: #fff;
+}
+
+.itemFoot {
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+/* upLoadFile */
+
+.overlayContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(to bottom, #101011, transparent);
+    z-index: 999;
+}
+
+.upFileContainer {
+    position: absolute;
+    width: 1000px;
+    height: 800px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #242526;
+    z-index: 999;
+    border: 1px solid #2f3031;
+    border-radius: 8px;
+}
+
+.containerImgTop {
+    width: 100%;
+    height: 70px;
+    border: 1px solid #2f3031;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.containerImgBottom {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.uploadButton {
+    display: block;
+    margin-top: 20px;
+    width: 80%;
+    height: 45px;
+    display: block;
+    border-radius: 8px;
+    background-color: #263951;
+    outline: none;
+    border: none;
+    color: #2d87fc;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.setUpSizeImg {
+    margin-top: 20px;
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+}
+
+.confirmButton {
+    position: absolute;
+    right: 5%;
+    bottom: 3%;
+    width: 20%;
+    height: 45px;
+    border-radius: 8px;
+    background-color: #263951;
+    outline: none;
+    border: none;
+    color: #2d87fc;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.uploadButton label,
+.confirmButton label {
+    cursor: pointer;
+}
+
+.hiddenUpFile {
+    display: none;
+}
+
+.iconClose {
+    position: absolute;
+    right: 2%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}

@@ -1,0 +1,69 @@
+.movie__list {
+    padding: 5.2rem 3rem 3rem 3rem;
+}
+
+.list__title__search {
+    display: flex;
+    align-items: center;
+}
+
+.list__title {
+    font-size: 1.75rem;
+    margin: 2.5rem;
+}
+
+.list__search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 40px;
+
+    margin-left: auto;
+    font-size: 1.56rem;
+    transition: width 0.5s ease;
+}
+
+.list__search.active {
+    width: 240px;
+    transition: width 0.5s ease;
+}
+
+.input__search {
+    width: 100%;
+    height: 42px;
+    padding: 6px 22px;
+    color: #fff;
+    font-size: 18px;
+    outline: none;
+    border: none;
+    background-color: #ff206e;
+    border-radius: 18px;
+}
+
+.input__search::placeholder {
+    font-size: 16px;
+    color: #fff;
+}
+
+.icon__search {
+    cursor: pointer;
+    position: absolute;
+    right: 6px;
+}
+
+.icon__search.active {
+    transform: translateX(-250px);
+    transition: 0.3s ease;
+}
+
+.list__cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media (min-width: 739px) and (max-width: 1023px) {
+    .movie__list {
+        margin-top: 40px;
+    }
+}

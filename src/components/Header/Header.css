@@ -1,0 +1,299 @@
+.header {
+    padding: 0.5rem 2.5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background-color: #242526;
+    border: 1px solid #3a3b3c;
+}
+
+.logoHeaderIcon {
+    display: none;
+}
+
+.headerMobile {
+    display: none;
+}
+
+.headerContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+}
+
+.headerPC {
+    width: 100%;
+}
+
+.headerPC,
+.headerLeft,
+.headerRight {
+    display: flex;
+    align-items: center;
+}
+
+.headerRight {
+    margin-left: auto;
+    margin-right: 50px;
+}
+
+#heading {
+    color: #f84b2f;
+}
+
+a > span {
+    margin: 0 30px;
+    font-size: 1.3rem;
+
+    cursor: pointer;
+    color: white;
+}
+
+a > span:hover {
+    color: #f84b2f;
+}
+
+.header-items {
+    height: 100%;
+}
+
+.header-items,
+.loginSuccess,
+.header_login {
+    display: flex;
+    align-items: center;
+}
+
+.titleHeader {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.checkColor {
+    position: relative;
+}
+
+.checkColor span {
+    color: #f84b2f;
+}
+
+.checkColor::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: #f84b2f;
+}
+
+.titleHeader:hover {
+    background-color: #454545;
+    border-radius: 6px;
+}
+
+.header_login {
+    line-height: 64px;
+}
+
+.logoLogin {
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+.loginSuccess {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.logoBell {
+    font-size: 1.4rem;
+    margin-right: 25px;
+}
+
+.user__avatar {
+    color: #fff;
+    margin-right: 5px;
+    font-size: 1.8rem;
+}
+
+.imgUser {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 999px;
+    border: 1px solid #595a5c;
+}
+
+.imgUser:hover {
+    filter: brightness(1.2);
+}
+
+.loginName {
+    cursor: pointer;
+    margin: 0 4px 0 4px;
+    font-size: 1.3rem;
+}
+
+.logoDown {
+    cursor: pointer;
+    margin: 0 0 0 10px;
+    font-size: 20px;
+    line-height: 64px;
+}
+
+.listLogoutItem {
+    position: absolute;
+    width: 200px;
+    height: 56px;
+    z-index: 1;
+    top: 122%;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    border-radius: 5px;
+    background: #242526;
+    border: 1px solid #3a3b3c;
+}
+
+.logoutItem {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 90%;
+    line-height: 44px;
+    list-style: none;
+}
+
+.logoutItem:hover {
+    border-radius: 6px;
+    background-color: dimgrey;
+}
+
+.logoLogout {
+    font-size: 22px;
+    color: #f84b2f;
+}
+
+.logoutTitle {
+    font-size: 22px;
+    color: #fff;
+    padding: 0 5px;
+}
+
+.logoutTitle:hover {
+    color: #f84b2f;
+}
+
+.disable {
+    display: none;
+}
+
+@media (min-width: 740px) and (max-width: 1023px) {
+    .logoHeaderIcon {
+    }
+
+    .logoHeaderIcon,
+    .headerMobile {
+        display: block;
+    }
+    .headerMobile {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 48px;
+        background-color: transparent;
+        border-radius: 8px;
+        z-index: 999;
+    }
+    .logoHeaderBar {
+        font-size: 26px;
+    }
+    .headerBarList {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        list-style: none;
+    }
+
+    .headerBarItem {
+        position: relative;
+        font-size: 18px;
+        border: 3px solid #ff206e;
+        padding: 10px 42px;
+        background-color: #c25757c4;
+        border-radius: 8px;
+    }
+
+    .headerContainer {
+        display: none;
+    }
+    .logoHeaderIcon {
+        margin-left: auto;
+    }
+}
+
+@media (max-width: 739px) {
+    .logoHeaderIcon {
+        display: block;
+    }
+    .headerMobile,
+    .headerContainer {
+        display: none;
+    }
+
+    .logoHeaderIcon {
+        margin-left: auto;
+    }
+
+    /* .headerMobile {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+        background-color: transparent;
+        border-radius: 8px;
+        z-index: 999;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+    .logoHeaderBar {
+        font-size: 26px;
+    }
+    .headerBarList {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        display: flex;
+
+        list-style: none;
+    }
+
+    .headerBarItem {
+        position: relative;
+        font-size: 18px;
+
+        padding: 10px 42px;
+        background-color: dimgrey;
+        border-radius: 8px;
+    }
+
+    .headerContainer {
+        display: none;
+    }
+    .logoHeaderIcon {
+        margin-left: auto;
+    } */
+}
