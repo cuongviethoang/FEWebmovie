@@ -10,12 +10,6 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
     const [popularMovies, setPopularMovies] = useState([]);
 
-    // useEffect(() => {
-    //     fetch("http://localhost:8081/api/movies/popular")
-    //         .then((res) => res.json())
-    //         .then((data) => setPopularMovies(data));
-    // }, []);
-
     const navigate = useNavigate();
 
     useEffect(() => {

@@ -1,9 +1,9 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment } from "react";
 import Header from "../Header/Header";
 import "../Profile/Profile.css";
 import "../grid/grid.css";
 import { AiFillCamera } from "react-icons/ai";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import axios from "axios";
 
@@ -74,14 +74,14 @@ function Profile() {
             <Header />
             <div
                 className={
-                    checkCamera == true
+                    checkCamera
                         ? "overlayContainer"
                         : "overlayContainer hiddenUpFile"
                 }
             ></div>
             <div
                 className={
-                    checkCamera == true
+                    checkCamera
                         ? "upFileContainer"
                         : "upFileContainer hiddenUpFile"
                 }
@@ -119,7 +119,7 @@ function Profile() {
                         <div className="intro_top">
                             <img
                                 className="intro_top_img"
-                                src="https://wallpaperaccess.com/full/1235065.jpg"
+                                src="https://www.gamesvillage.it/wp-content/uploads/2020/04/ori-and-the-will-of-the-wisps-abilities-1920x1080.jpg"
                                 alt=""
                             />
                             <div className="overlayImg"></div>
@@ -156,44 +156,6 @@ function Profile() {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div className="containerDonors">
-                    <div className="container">
-                        <h1 className="Donors">Donors</h1>
-                        <ul className="listDonors">
-                            <li className="donorOne">
-                                <img
-                                    className="donorImgSize"
-                                    src="https://my-list.ml/img/logo/tmdb-logo-square.png"
-                                    alt=""
-                                />
-                            </li>
-
-                            <li className="donorOne">
-                                <img
-                                    className="donorImgSize"
-                                    src="https://i1.wp.com/letstalkhair.tv/wp-content/uploads/2019/07/imdb_logo_png_699617.png?resize=506%2C500&ssl=1"
-                                    alt=""
-                                />
-                            </li>
-
-                            <li className="donorOne">
-                                <img
-                                    className="donorImgSize"
-                                    src="https://www.vectorico.com/download/social_media/youtube-red-squircle.png"
-                                    alt=""
-                                />
-                            </li>
-
-                            <li className="donorOne">
-                                <img
-                                    className="donorImgSize"
-                                    src="https://yt3.ggpht.com/a/AATXAJyzyrPJMwSCUxtTlY-MQ9sEqX8XHm8MYq4yr7e6Gw=s900-c-k-c0xffffffff-no-rj-mo"
-                                    alt=""
-                                />
-                            </li>
-                        </ul>
                     </div>
                 </div>
                 <footer className="footerMovie">

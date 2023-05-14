@@ -1,14 +1,20 @@
 import React, { Fragment } from "react";
 import { useState, useRef } from "react";
 import "./FormSM.css";
-import { AiOutlineMail, AiOutlineUser } from "react-icons/ai";
+import {
+    AiOutlineMail,
+    AiOutlineUser,
+    AiOutlineCheck,
+    AiOutlineExclamationCircle,
+} from "react-icons/ai";
 import { MdPassword } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function FormSM() {
     const [isCheckLogin, setCheckLogin] = useState(false);
-
+    const [message, setMessage] = useState("");
+    const [successful, setSuccessFul] = useState(false);
     const useNameRef = useRef();
     const emailRef = useRef();
     const passRef = useRef();
@@ -64,8 +70,8 @@ function FormSM() {
                     setErrEmail("");
                 }
             } else if (fliedName === "password") {
-                if (value.length < 8) {
-                    setErrPass("Vui lòng nhập từ 8 kí tự trở lên");
+                if (value.length < 6) {
+                    setErrPass("Vui lòng nhập từ 6 kí tự trở lên");
                 } else {
                     setErrPass("");
                 }
@@ -95,7 +101,6 @@ function FormSM() {
         if (!userName && !email && !password) {
             alert("Vui lòng đúng  thông tin");
         } else if (userName && email && password) {
-            alert("Đăng kí thành công");
             axios
                 .post("http://localhost:8081/api/auth/signup", {
                     username: userName,
@@ -103,17 +108,29 @@ function FormSM() {
                     email: email,
                 })
                 .then((response) => {
-                    if (response.status == 200) {
-                        return response.data;
-                    }
-                    throw Error(response.status);
+                    return response.data;
                 })
                 .then((result) => {
-                    console.log(result);
-                    navigate("/FormLG");
+                    setSuccessFul(true);
+                    console.log(result.message);
+                    setMessage(result.message);
+                    setTimeout(() => {
+                        setMessage("");
+                    }, 5000);
                 })
                 .catch((error) => {
-                    console.log("error", error);
+                    const resMessage =
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+                    console.log(resMessage);
+                    setMessage(resMessage);
+                    setSuccessFul(false);
+                    setTimeout(() => {
+                        setMessage("");
+                    }, 3000);
                 });
         }
     };
@@ -260,6 +277,24 @@ function FormSM() {
                         </div>
                     </div>
                 </div>
+                {message && (
+                    <div className="alert">
+                        <div
+                            className={
+                                successful
+                                    ? "alert_icon alert_success"
+                                    : "alert_icon alert_danger"
+                            }
+                        >
+                            {successful ? (
+                                <AiOutlineCheck className="iconSuccess" />
+                            ) : (
+                                <AiOutlineExclamationCircle className="iconDanger" />
+                            )}
+                        </div>
+                        <div className="alert_message">{message}</div>
+                    </div>
+                )}
             </div>
         </Fragment>
     );

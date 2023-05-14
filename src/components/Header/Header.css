@@ -5,7 +5,8 @@
     left: 0;
     right: 0;
     z-index: 50;
-    background-color: #242526;
+    background-image: url("../../images/anhbgheadermovie.jpg");
+    object-fit: cover;
     border: 1px solid #3a3b3c;
 }
 
@@ -41,7 +42,7 @@
 }
 
 #heading {
-    color: #f84b2f;
+    color: #f9c4fb;
 }
 
 a > span {
@@ -53,7 +54,7 @@ a > span {
 }
 
 a > span:hover {
-    color: #f84b2f;
+    color: #f9c4fb;
 }
 
 .header-items {
@@ -78,7 +79,7 @@ a > span:hover {
 }
 
 .checkColor span {
-    color: #f84b2f;
+    color: #f9c4fb;
 }
 
 .checkColor::after {
@@ -88,7 +89,7 @@ a > span:hover {
     height: 3px;
     bottom: 0;
     left: 0;
-    background-color: #f84b2f;
+    background-color: #f9c4fb;
 }
 
 .titleHeader:hover {
@@ -179,7 +180,7 @@ a > span:hover {
 
 .logoLogout {
     font-size: 22px;
-    color: #f84b2f;
+    color: #f9c4fb;
 }
 
 .logoutTitle {
@@ -189,7 +190,7 @@ a > span:hover {
 }
 
 .logoutTitle:hover {
-    color: #f84b2f;
+    color: #f9c4fb;
 }
 
 .disable {

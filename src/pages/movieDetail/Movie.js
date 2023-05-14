@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./movie.css";
 import { useParams, useNavigate } from "react-router-dom";
-import { AiOutlineFieldTime } from "react-icons/ai";
+import { AiOutlineFieldTime, AiFillLike, AiFillDislike } from "react-icons/ai";
 
 import Header from "../../components/Header/Header";
 import ReactPlayer from "react-player";
@@ -11,7 +11,8 @@ const Movie = () => {
     const [currentMovieDetail, setMovie] = useState();
     const [currentComment, setComment] = useState([]);
     const [valueInput, setValueInput] = useState("");
-    const [activeInput, setActiveInput] = useState(false);
+    const [currentLike, setLike] = useState([]);
+    const [currentDis, setDislike] = useState([]);
 
     const API_LINK = "http://localhost:8081/api/file/getImg";
 
@@ -20,6 +21,9 @@ const Movie = () => {
 
     useEffect(() => {
         getData();
+        getComment();
+        getLike();
+        getDislike();
         window.scrollTo(0, 0);
     }, []);
 
@@ -42,28 +46,19 @@ const Movie = () => {
             })
             .catch((error) => {
                 console.log("error", error);
-                logout();
             });
     };
 
-    useEffect(() => {
-        getComment();
-        window.scrollTo(0, 0);
-    }, []);
-
     const getComment = () => {
         axios
-            .get(`http://localhost:8081/api/movies/1/comments`, {
+            .get(`http://localhost:8081/api/movies/${id}/comments`, {
                 headers: {
                     Authorization:
                         "Bearer " + localStorage.getItem("accessToken"),
                 },
             })
             .then((response) => {
-                if (response.status == 200) {
-                    return response.data;
-                }
-                throw Error(response.status);
+                return response.data;
             })
             .then((result) => {
                 setComment(result);
@@ -71,20 +66,91 @@ const Movie = () => {
             })
             .catch((error) => {
                 console.log("error", error);
-                logout();
             });
     };
 
-    const logout = () => {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("username");
-        localStorage.removeItem("email");
-        navigate("/FormLG");
+    const getLike = () => {
+        axios
+            .get(`http://localhost:8081/api/movie/${id}/likes`, {
+                headers: {
+                    Authorization:
+                        "Bearer " + localStorage.getItem("accessToken"),
+                },
+            })
+            .then((res) => {
+                setLike(res.data);
+                console.log(res.data);
+                return res.data;
+            })
+            .catch((error) => console.log("error: ", error));
+    };
+
+    const getDislike = () => {
+        axios
+            .get(`http://localhost:8081/api/movie/${id}/dislikes`, {
+                headers: {
+                    Authorization:
+                        "Bearer " + localStorage.getItem("accessToken"),
+                },
+            })
+            .then((res) => {
+                setDislike(res.data);
+                console.log(res.data);
+                return res.data;
+            })
+            .catch((error) => console.log("error: ", error));
+    };
+
+    const handleLike = () => {
+        axios
+            .post(
+                `http://localhost:8081/api/movie/${id}/like`,
+                {},
+                {
+                    headers: {
+                        Authorization:
+                            "Bearer " + localStorage.getItem("accessToken"),
+                    },
+                }
+            )
+            .then((res) => {
+                return res.data;
+            })
+            .then((result) => {
+                getLike();
+                return result;
+            })
+            .catch((error) => console.log("error: ", error));
+    };
+
+    const handleDislike = () => {
+        axios
+            .post(
+                `http://localhost:8081/api/movie/${id}/dislike`,
+                {},
+                {
+                    headers: {
+                        Authorization:
+                            "Bearer " + localStorage.getItem("accessToken"),
+                    },
+                }
+            )
+            .then((res) => {
+                return res.data;
+            })
+            .then((result) => {
+                getDislike();
+                return result;
+            })
+            .catch((error) => console.log("error: ", error));
     };
 
     const handleChangInput = (e) => {
-        setActiveInput(true);
         setValueInput(e.target.value);
+    };
+
+    const shouldEnableCommentButton = () => {
+        return valueInput.trim() !== "";
     };
 
     const handleClickPost = () => {
@@ -105,9 +171,8 @@ const Movie = () => {
                 return res.data;
             })
             .then((result) => {
-                currentComment.push(result);
+                getComment();
                 setValueInput("");
-                setActiveInput(false);
                 return result;
             })
             .catch((error) => console.log("error: ", error));
@@ -170,6 +235,29 @@ const Movie = () => {
                                           )
                                         : ""}
                                 </div>
+                            </div>
+                        </div>
+                        <div className="saveMovieInStore">
+                            <button className="btnSave">Save Movie</button>
+                        </div>
+                        <div className="reactUser">
+                            <div
+                                className="react reactLike"
+                                onClick={handleLike}
+                            >
+                                <AiFillLike className="iconLike" />
+                                <label className="numReact">
+                                    {currentLike.length}
+                                </label>
+                            </div>
+                            <div
+                                className="react reactDis"
+                                onClick={handleDislike}
+                            >
+                                <AiFillDislike className="iconDislike" />
+                                <label className="numReact">
+                                    {currentDis.length}
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -281,26 +369,26 @@ const Movie = () => {
                         />
                         <div className="containerInput">
                             <input
-                                className={
-                                    activeInput
-                                        ? "inputType activeInput"
-                                        : "inputType"
-                                }
+                                className="inputType activeInput"
                                 placeholder="Viết bình luận..."
                                 value={valueInput}
                                 onChange={handleChangInput}
                             />
                             <div className="containerBtn">
-                                <button className="deleteBtn">
+                                <button
+                                    className="deleteBtn"
+                                    disabled={!shouldEnableCommentButton()}
+                                >
                                     <label>Hủy</label>
                                 </button>
                                 <button
                                     className={
-                                        activeInput
-                                            ? "submitBtn activeBtn"
-                                            : "submitBtn"
+                                        !shouldEnableCommentButton()
+                                            ? "submitBtn"
+                                            : "submitBtn activeBtn"
                                     }
                                     onClick={handleClickPost}
+                                    disabled={!shouldEnableCommentButton()}
                                 >
                                     <label>Bình luận</label>
                                 </button>
@@ -308,43 +396,38 @@ const Movie = () => {
                         </div>
                     </div>
                     <div className="containerBottom">
-                        {currentComment
-                            ? currentComment.map((comment, index) => (
-                                  <div
-                                      className="containerCommentUser"
-                                      key={index}
-                                  >
-                                      <img
-                                          className="containerImg"
-                                          src={
-                                              comment.user.profileImg != ""
-                                                  ? "http://localhost:8081/api/file/getImg?path=" +
-                                                    comment.user.profileImg
-                                                  : "https://tse3.mm.bing.net/th?id=OIP.CiC4AzdlWzYcj2j65RM33AAAAA&pid=Api&P=0"
-                                          }
-                                          alt=""
-                                      />
-                                      <div className="containerUserOther">
-                                          <div className="infoUser">
-                                              <h4 className="nameUser">
-                                                  {comment.user.username}
-                                              </h4>
-                                              <p className="datePost">
-                                                  {comment.date}
-                                              </p>
-                                              <p className="datePost">
-                                                  {comment.time}
-                                              </p>
-                                          </div>
-                                          <div className="contentPost">
-                                              <p className="titleConent">
-                                                  {comment.content}
-                                              </p>
-                                          </div>
-                                      </div>
-                                  </div>
-                              ))
-                            : ""}
+                        {currentComment.map((comment, index) => (
+                            <div className="containerCommentUser" key={index}>
+                                <img
+                                    className="containerImg"
+                                    src={
+                                        comment.imgUser != ""
+                                            ? "http://localhost:8081/api/file/getImg?path=" +
+                                              comment.imgUser
+                                            : "https://tse3.mm.bing.net/th?id=OIP.CiC4AzdlWzYcj2j65RM33AAAAA&pid=Api&P=0"
+                                    }
+                                    alt=""
+                                />
+                                <div className="containerUserOther">
+                                    <div className="infoUser">
+                                        <h4 className="nameUser">
+                                            {comment.username}
+                                        </h4>
+                                        <p className="datePost">
+                                            {comment.date}
+                                        </p>
+                                        <p className="datePost">
+                                            {comment.time}
+                                        </p>
+                                    </div>
+                                    <div className="contentPost">
+                                        <p className="titleConent">
+                                            {comment.content}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

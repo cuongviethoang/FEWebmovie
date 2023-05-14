@@ -1,16 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,500&display=swap");
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "poppins", sans-serif;
-}
 
 .body {
     background: #000;
     color: #fff;
     height: 100vh;
     width: 100%;
+    overflow: hidden;
 }
 
 a {
@@ -22,7 +17,7 @@ a {
 }
 
 .form_background {
-    background: url(../../images/backgroun3.jpg) no-repeat;
+    background: url(../../images/bgwebmovie.jpg) no-repeat;
     width: 100%;
     height: 100vh;
     background-position: center;
@@ -36,7 +31,7 @@ a {
 
 .form_container {
     position: absolute;
-    background: url(../../images/backgroun3.jpg) no-repeat;
+    background: url(../../images/bgwebmovie.jpg) no-repeat;
     background-position: center;
     background-size: cover;
     top: 50%;
@@ -113,7 +108,7 @@ a {
     position: relative;
     width: 340px;
     height: 42px;
-    margin: 36px 0;
+    margin: 40px 0;
 }
 
 .container_input input {
@@ -131,6 +126,7 @@ a {
 .container_input input:focus ~ label,
 .container_input input:valid ~ label {
     top: 4px;
+    bottom: -8px;
 }
 
 .container_input-icon {
@@ -175,7 +171,7 @@ a {
     height: 46px;
     border-radius: 5px;
     cursor: pointer;
-    background: #f72d7a;
+    background: #e781f9;
     color: #fff;
     font-size: 16px;
     border: none;
@@ -212,6 +208,83 @@ a {
     color: #fff;
     font-size: 14px;
     opacity: 0.7;
+}
+
+/* alert */
+.alert {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 100px;
+    background-image: url("../../images/bgwebmovie.jpg");
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn ease 3s;
+    transition: 3s;
+    border: 1px solid #ffddf6;
+    border-left: none;
+    border-radius: 8px;
+    box-shadow: 16px 16px 30px #ffddf6;
+}
+
+.alert_icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.alert_success::before {
+    content: "";
+    background-color: #85ffbd;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+}
+
+.alert_danger::before {
+    content: "";
+    background-color: red;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 3px;
+}
+
+.iconSuccess {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    color: #85ffbd;
+}
+
+.iconDanger {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    color: red;
+}
+
+.alert_message {
+    font-size: 1.1rem;
+    color: #ffddf6;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @media (max-width: 1023px) {

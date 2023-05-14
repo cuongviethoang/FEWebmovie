@@ -1,7 +1,11 @@
 import React, { Fragment } from "react";
 import { useState, useRef } from "react";
 import "./FormSM.css";
-import { AiOutlineMail, AiOutlineUser } from "react-icons/ai";
+import {
+    AiOutlineMail,
+    AiOutlineUser,
+    AiOutlineExclamationCircle,
+} from "react-icons/ai";
 import { MdPassword } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -14,6 +18,7 @@ function FormLG() {
     const [isLogin, setIsLogin] = useState(
         localStorage.getItem("accessToken") !== null
     );
+    const [message, setMessage] = useState("");
 
     const navigate = useNavigate();
 
@@ -29,10 +34,7 @@ function FormLG() {
                 password: password,
             })
             .then((response) => {
-                if (response.status == 200) {
-                    return response.data;
-                }
-                throw Error(response.status);
+                return response.data;
             })
             .then((result) => {
                 localStorage.setItem("accessToken", result.accessToken);
@@ -46,7 +48,10 @@ function FormLG() {
                 navigate("/Profile");
             })
             .catch((error) => {
-                console.log("error", error);
+                setMessage("Your account password is not correct");
+                setTimeout(() => {
+                    setMessage("");
+                }, 3000);
             });
     };
 
@@ -145,6 +150,14 @@ function FormLG() {
                         </div>
                     </div>
                 </div>
+                {message && (
+                    <div className="alert">
+                        <div className="alert_icon alert_danger">
+                            <AiOutlineExclamationCircle className="iconDanger" />
+                        </div>
+                        <div className="alert_message">{message}</div>
+                    </div>
+                )}
             </div>
         </Fragment>
     );
