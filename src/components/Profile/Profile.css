@@ -100,6 +100,72 @@
     font-size: 1.2rem;
 }
 
+/* Store Movie */
+.containerStore {
+    background-color: #242526;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.titleStoreMovie {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 80%;
+    height: 40px;
+    margin-bottom: 24px;
+}
+
+.titleStoreMovie span {
+    width: 2px;
+    height: 100%;
+    position: relative;
+    display: inline-block;
+}
+
+.titleStoreMovie span::before {
+    content: "";
+    position: absolute;
+    background-image: linear-gradient(to top, #3ea6ff, #f9c4fb);
+    height: 100%;
+    width: 2px;
+}
+
+.titleStoreMovie p {
+    display: inline-block;
+    font-size: 1.8rem;
+    background: linear-gradient(to bottom, #3ea6ff, #f9c4fb);
+    -webkit-background-clip: text; /* Tương thích với trình duyệt WebKit-based (Chrome, Safari) */
+    -webkit-text-fill-color: transparent; /* Tương thích với trình duyệt WebKit-based (Chrome, Safari) */
+    background-clip: text; /* Tương thích với trình duyệt không phải WebKit-based */
+    letter-spacing: 1px;
+    margin-left: 4px;
+    text-shadow: 4px 4px 10px #effbc4;
+}
+
+.containerMovie {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-radius: 8px;
+    border: 1px solid #f9c4fb;
+}
+
+.iconCloseMovieStore {
+    position: absolute;
+    font-size: 1.5rem;
+    right: 0;
+    top: 1%;
+    transition: 0.5s;
+    color: #fff;
+}
+
+.iconCloseMovieStore:hover {
+    scale: 1.2;
+}
+
 /* Footer */
 
 .container {
@@ -110,7 +176,7 @@
     display: flex;
     justify-content: center;
     background-color: #242526;
-    padding-top: 50px;
+    padding-top: 100px;
     height: 300px;
 }
 

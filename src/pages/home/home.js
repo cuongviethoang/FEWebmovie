@@ -25,13 +25,9 @@ const Home = () => {
                 },
             })
             .then((response) => {
-                if (response.status == 200) {
-                    return response.data;
-                }
-                throw Error(response.status);
+                return response.data;
             })
             .then((result) => {
-                console.log(result);
                 setPopularMovies(result);
             })
             .catch((error) => {

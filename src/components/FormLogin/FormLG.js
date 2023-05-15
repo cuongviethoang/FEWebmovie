@@ -44,6 +44,7 @@ function FormLG() {
                     "profilePic",
                     result.profilePic ? result.profilePic : ""
                 );
+                localStorage.setItem("roles", result.roles[0]);
                 setIsLogin(true);
                 navigate("/Profile");
             })

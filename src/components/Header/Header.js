@@ -14,6 +14,9 @@ const Header = () => {
     const [checkColor, setCheckColor] = useState(false);
     const [checkColor1, setCheckColor1] = useState(false);
     const [checkColor2, setCheckColor2] = useState(false);
+    const [checkAdmin, setCheckAmin] = useState(
+        localStorage.getItem("roles").includes("ROLE_ADMIN")
+    );
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -49,6 +52,7 @@ const Header = () => {
         localStorage.removeItem("email");
         localStorage.removeItem("imgUser");
         localStorage.removeItem("profilePic");
+        localStorage.removeItem("roles");
         navigate("/FormLG");
     };
 
@@ -130,6 +134,38 @@ const Header = () => {
                             >
                                 <span>Upcoming</span>
                             </Link>
+                            {checkAdmin ? (
+                                <Link
+                                    onClick={handleCheckColor2}
+                                    to="/SelectManager"
+                                    style={{ textDecoration: "none" }}
+                                    className={
+                                        checkColor2 == true
+                                            ? "titleHeader checkColor"
+                                            : "titleHeader"
+                                    }
+                                >
+                                    <span>ManagerMovie</span>
+                                </Link>
+                            ) : (
+                                ""
+                            )}
+                            {checkAdmin ? (
+                                <Link
+                                    onClick={handleCheckColor2}
+                                    to="/movies/upcoming"
+                                    style={{ textDecoration: "none" }}
+                                    className={
+                                        checkColor2 == true
+                                            ? "titleHeader checkColor"
+                                            : "titleHeader"
+                                    }
+                                >
+                                    <span>Stat</span>
+                                </Link>
+                            ) : (
+                                ""
+                            )}
                         </div>
                     </div>
                     <div className="headerRight">

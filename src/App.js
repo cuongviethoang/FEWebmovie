@@ -6,6 +6,8 @@ import Movie from "./pages/movieDetail/Movie";
 import FormSM from "./components/FormLogin/FormSM";
 import FormLG from "./components/FormLogin/FormLG";
 import Profile from "./components/Profile/Profile";
+import SelectManager from "./components/selectManager/SelectManager";
+import DeleteMovie from "./components/deleteMovie/DeleteMovie";
 
 function App() {
     return (
@@ -19,6 +21,11 @@ function App() {
                     <Route path="FormSM" element={<FormSM />}></Route>
                     <Route path="FormLG" element={<FormLG />}></Route>
                     <Route path="Profile" element={<Profile />}></Route>
+                    <Route
+                        path="SelectManager"
+                        element={<SelectManager />}
+                    ></Route>
+                    <Route path="DeleteMovie" element={<DeleteMovie />}></Route>
                     <Route index element={<FormLG />}></Route>
                 </Routes>
             </Router>

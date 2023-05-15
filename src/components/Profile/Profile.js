@@ -2,15 +2,58 @@ import React, { Fragment } from "react";
 import Header from "../Header/Header";
 import "../Profile/Profile.css";
 import "../grid/grid.css";
-import { AiFillCamera } from "react-icons/ai";
-import { useState } from "react";
+import { AiFillCamera, AiOutlineCloseCircle } from "react-icons/ai";
+import { useState, useEffect } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import axios from "axios";
+import "../card/card.css";
+import { Link } from "react-router-dom";
 
 function Profile() {
     const [checkCamera, setCheckCamera] = useState(false);
     const [files, setFiles] = useState(null);
     const [imageSrc, setImageSrc] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
+    const [store, setStore] = useState([]);
+
+    useEffect(() => {
+        getData();
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
+    }, []);
+
+    const getData = () => {
+        axios
+            .get("http://localhost:8081/api/localStores", {
+                headers: {
+                    Authorization:
+                        "Bearer " + localStorage.getItem("accessToken"),
+                },
+            })
+            .then((res) => res.data)
+            .then((result) => {
+                setStore(result);
+                return result;
+            })
+            .catch((error) => console.log("error: ", error));
+    };
+
+    const deleteMovieInStore = (index) => {
+        axios
+            .delete(`http://localhost:8081/api/localStore/${index}`, {
+                headers: {
+                    Authorization:
+                        "Bearer " + localStorage.getItem("accessToken"),
+                },
+            })
+            .then((res) => res.data)
+            .then((result) => {
+                getData();
+                return result;
+            })
+            .catch((error) => console.log("error: ", error));
+    };
 
     const handleUpFile = () => {
         setCheckCamera(true);
@@ -156,6 +199,53 @@ function Profile() {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div className="containerStore">
+                    <div className="titleStoreMovie">
+                        <span></span>
+                        <p>STORE MOVIE</p>
+                    </div>
+                    <div className="container containerMovie">
+                        {store.map((movie, index) => (
+                            <div className="cardStore" key={index}>
+                                <AiOutlineCloseCircle
+                                    className="iconCloseMovieStore"
+                                    onClick={() => deleteMovieInStore(movie.id)}
+                                />
+                                <img
+                                    alt=""
+                                    className="cards__img"
+                                    src={movie.moviePicture}
+                                />
+                                <Link
+                                    to={`/movie/${movie.movieId}`}
+                                    style={{
+                                        textDecoration: "none",
+                                        color: "white",
+                                    }}
+                                >
+                                    <div className="cards__overlay">
+                                        <div className="card__title">
+                                            {movie.movieName}
+                                        </div>
+                                        <div className="card__runtime">
+                                            {movie.releaseDate}
+                                            <span className="card__rating">
+                                                {movie.voteAverage}
+                                                <i className="fas fa-star" />
+                                            </span>
+                                        </div>
+                                        <div className="card__description">
+                                            {movie
+                                                ? movie.overview.slice(0, 118) +
+                                                  "..."
+                                                : ""}
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                        ))}
                     </div>
                 </div>
                 <footer className="footerMovie">

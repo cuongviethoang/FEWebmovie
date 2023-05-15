@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./movie.css";
 import { useParams, useNavigate } from "react-router-dom";
-import { AiOutlineFieldTime, AiFillLike, AiFillDislike } from "react-icons/ai";
+import {
+    AiOutlineFieldTime,
+    AiFillLike,
+    AiFillDislike,
+    AiOutlineExclamationCircle,
+} from "react-icons/ai";
 
 import Header from "../../components/Header/Header";
 import ReactPlayer from "react-player";
@@ -13,6 +18,7 @@ const Movie = () => {
     const [valueInput, setValueInput] = useState("");
     const [currentLike, setLike] = useState([]);
     const [currentDis, setDislike] = useState([]);
+    const [message, setMessage] = useState("");
 
     const API_LINK = "http://localhost:8081/api/file/getImg";
 
@@ -44,9 +50,7 @@ const Movie = () => {
             .then((result) => {
                 setMovie(result);
             })
-            .catch((error) => {
-                console.log("error", error);
-            });
+            .catch((error) => console.log("error: ", error));
     };
 
     const getComment = () => {
@@ -79,7 +83,6 @@ const Movie = () => {
             })
             .then((res) => {
                 setLike(res.data);
-                console.log(res.data);
                 return res.data;
             })
             .catch((error) => console.log("error: ", error));
@@ -95,7 +98,6 @@ const Movie = () => {
             })
             .then((res) => {
                 setDislike(res.data);
-                console.log(res.data);
                 return res.data;
             })
             .catch((error) => console.log("error: ", error));
@@ -151,6 +153,34 @@ const Movie = () => {
 
     const shouldEnableCommentButton = () => {
         return valueInput.trim() !== "";
+    };
+
+    const handleSaveMovie = () => {
+        axios
+            .post(
+                `http://localhost:8081/api/movie/${id}/localStore`,
+                {},
+                {
+                    headers: {
+                        Authorization:
+                            "Bearer " + localStorage.getItem("accessToken"),
+                    },
+                }
+            )
+            .then((res) => res.data)
+            .catch((error) => {
+                const resMess =
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+                console.log(resMess);
+                setMessage(resMess);
+                setTimeout(() => {
+                    setMessage("");
+                }, 3000);
+            });
     };
 
     const handleClickPost = () => {
@@ -238,7 +268,12 @@ const Movie = () => {
                             </div>
                         </div>
                         <div className="saveMovieInStore">
-                            <button className="btnSave">Save Movie</button>
+                            <button
+                                className="btnSave"
+                                onClick={handleSaveMovie}
+                            >
+                                Save Movie
+                            </button>
                         </div>
                         <div className="reactUser">
                             <div
@@ -431,6 +466,14 @@ const Movie = () => {
                     </div>
                 </div>
             </div>
+            {message && (
+                <div className="alert">
+                    <div className="alert_icon alert_danger">
+                        <AiOutlineExclamationCircle className="iconDanger" />
+                    </div>
+                    <div className="alert_message">{message}</div>
+                </div>
+            )}
         </>
     );
 };
