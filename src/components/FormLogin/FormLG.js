@@ -1,11 +1,7 @@
 import React, { Fragment } from "react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import "./FormSM.css";
-import {
-    AiOutlineMail,
-    AiOutlineUser,
-    AiOutlineExclamationCircle,
-} from "react-icons/ai";
+import { AiOutlineMail, AiOutlineExclamationCircle } from "react-icons/ai";
 import { MdPassword } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";

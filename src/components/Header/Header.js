@@ -2,9 +2,8 @@ import React from "react";
 import "./Header.css";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa";
 import { AiFillCaretDown, AiOutlineLogin } from "react-icons/ai";
-import { FaBell, FaBars } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import axios from "axios";
 
 const Header = () => {
@@ -32,10 +31,7 @@ const Header = () => {
                 },
             })
             .then((response) => {
-                if (response.status == 200) {
-                    return response.data;
-                }
-                throw Error(response.status);
+                return response.data;
             })
             .then((result) => {
                 setStorage(result);
@@ -65,20 +61,20 @@ const Header = () => {
 
     const handleCheckColor = () => {
         setCheckColor(true);
-        if (checkColor1 == true) setCheckColor1(false);
-        if (checkColor2 == true) setCheckColor2(false);
+        if (checkColor1) setCheckColor1(false);
+        if (checkColor2) setCheckColor2(false);
     };
 
     const handleCheckColor1 = () => {
         setCheckColor1(true);
-        if (checkColor == true) setCheckColor(false);
-        if (checkColor2 == true) setCheckColor2(false);
+        if (checkColor) setCheckColor(false);
+        if (checkColor2) setCheckColor2(false);
     };
 
     const handleCheckColor2 = () => {
         setCheckColor2(true);
-        if (checkColor == true) setCheckColor(false);
-        if (checkColor1 == true) setCheckColor1(false);
+        if (checkColor) setCheckColor(false);
+        if (checkColor1) setCheckColor1(false);
     };
 
     return (
@@ -103,7 +99,7 @@ const Header = () => {
                                 to="/movies/popular"
                                 style={{ textDecoration: "none" }}
                                 className={
-                                    checkColor == true
+                                    checkColor
                                         ? "titleHeader checkColor"
                                         : "titleHeader"
                                 }
@@ -115,7 +111,7 @@ const Header = () => {
                                 to="/movies/top_rated"
                                 style={{ textDecoration: "none" }}
                                 className={
-                                    checkColor1 == true
+                                    checkColor1
                                         ? "titleHeader checkColor"
                                         : "titleHeader"
                                 }
@@ -127,7 +123,7 @@ const Header = () => {
                                 to="/movies/upcoming"
                                 style={{ textDecoration: "none" }}
                                 className={
-                                    checkColor2 == true
+                                    checkColor2
                                         ? "titleHeader checkColor"
                                         : "titleHeader"
                                 }
@@ -137,13 +133,9 @@ const Header = () => {
                             {checkAdmin ? (
                                 <Link
                                     onClick={handleCheckColor2}
-                                    to="/SelectManager"
+                                    to="/ManagerMovie"
                                     style={{ textDecoration: "none" }}
-                                    className={
-                                        checkColor2 == true
-                                            ? "titleHeader checkColor"
-                                            : "titleHeader"
-                                    }
+                                    className="titleHeader"
                                 >
                                     <span>ManagerMovie</span>
                                 </Link>
@@ -153,13 +145,9 @@ const Header = () => {
                             {checkAdmin ? (
                                 <Link
                                     onClick={handleCheckColor2}
-                                    to="/movies/upcoming"
+                                    to="/Stat"
                                     style={{ textDecoration: "none" }}
-                                    className={
-                                        checkColor2 == true
-                                            ? "titleHeader checkColor"
-                                            : "titleHeader"
-                                    }
+                                    className="titleHeader"
                                 >
                                     <span>Stat</span>
                                 </Link>

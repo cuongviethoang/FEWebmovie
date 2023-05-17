@@ -206,7 +206,7 @@ function Profile() {
                         <span></span>
                         <p>STORE MOVIE</p>
                     </div>
-                    <div className="container containerMovie">
+                    <div className="containerMovie">
                         {store.map((movie, index) => (
                             <div className="cardStore" key={index}>
                                 <AiOutlineCloseCircle

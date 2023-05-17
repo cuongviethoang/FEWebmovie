@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "./movie.css";
-import { useParams, useNavigate } from "react-router-dom";
+import "./Movie.css";
+import { useParams } from "react-router-dom";
 import {
     AiOutlineFieldTime,
     AiFillLike,
     AiFillDislike,
-    AiOutlineExclamationCircle,
+    AiOutlineCheck,
+    AiFillCloseCircle,
 } from "react-icons/ai";
-
 import Header from "../../components/Header/Header";
 import ReactPlayer from "react-player";
 import axios from "axios";
@@ -20,10 +20,7 @@ const Movie = () => {
     const [currentDis, setDislike] = useState([]);
     const [message, setMessage] = useState("");
 
-    const API_LINK = "http://localhost:8081/api/file/getImg";
-
     const { id } = useParams();
-    const navigate = useNavigate();
 
     useEffect(() => {
         getData();
@@ -42,10 +39,7 @@ const Movie = () => {
                 },
             })
             .then((response) => {
-                if (response.status == 200) {
-                    return response.data;
-                }
-                throw Error(response.status);
+                return response.data;
             })
             .then((result) => {
                 setMovie(result);
@@ -69,7 +63,7 @@ const Movie = () => {
                 return result;
             })
             .catch((error) => {
-                console.log("error", error);
+                console.log("error: ", error);
             });
     };
 
@@ -167,7 +161,13 @@ const Movie = () => {
                     },
                 }
             )
-            .then((res) => res.data)
+            .then((res) => {
+                setMessage("Lưu phim thành công");
+                setTimeout(() => {
+                    setMessage("");
+                }, 3000);
+                return res.data;
+            })
             .catch((error) => {
                 const resMess =
                     (error.response &&
@@ -175,7 +175,6 @@ const Movie = () => {
                         error.response.data.message) ||
                     error.message ||
                     error.toString();
-                console.log(resMess);
                 setMessage(resMess);
                 setTimeout(() => {
                     setMessage("");
@@ -206,6 +205,25 @@ const Movie = () => {
                 return result;
             })
             .catch((error) => console.log("error: ", error));
+    };
+
+    const handleDeleteComment = (commentId) => {
+        axios
+            .delete(`http://localhost:8081/api/comment/${commentId}`, {
+                headers: {
+                    Authorization:
+                        "Bearer " + localStorage.getItem("accessToken"),
+                },
+            })
+            .then((res) => {
+                alert("Xóa bình luận thành công");
+                getComment();
+                return res.data;
+            })
+            .catch((error) => {
+                alert("Bình luận này không phải của bạn");
+                console.log("error: ", error);
+            });
     };
 
     return (
@@ -454,6 +472,12 @@ const Movie = () => {
                                         <p className="datePost">
                                             {comment.time}
                                         </p>
+                                        <AiFillCloseCircle
+                                            className="iconDelete"
+                                            onClick={() =>
+                                                handleDeleteComment(comment.id)
+                                            }
+                                        />
                                     </div>
                                     <div className="contentPost">
                                         <p className="titleConent">
@@ -468,8 +492,8 @@ const Movie = () => {
             </div>
             {message && (
                 <div className="alert">
-                    <div className="alert_icon alert_danger">
-                        <AiOutlineExclamationCircle className="iconDanger" />
+                    <div className="alert_icon alert_success">
+                        <AiOutlineCheck className="iconSuccess" />
                     </div>
                     <div className="alert_message">{message}</div>
                 </div>

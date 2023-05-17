@@ -39,6 +39,7 @@
 }
 
 .saveMovieInStore {
+    margin-top: 10px;
     width: 100%;
     height: 46px;
     border-radius: 8px;
@@ -320,6 +321,7 @@
 
 .deleteBtn label,
 .submitBtn label {
+    line-height: 45px;
     font-size: 1.1rem;
     color: #fff;
     font-weight: 550;
@@ -366,6 +368,23 @@
 .titleConent {
     font-size: 1rem;
 }
+
+/* Xoá bình luận */
+
+.iconDelete {
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    background-color: transparent;
+    color: #fff;
+}
+
+.iconDelete:hover {
+    color: #000000;
+    background-color: #ccc;
+}
+/*  Hết xóa bình luận */
 
 .datePost {
     margin: 0 5px 0 5px;

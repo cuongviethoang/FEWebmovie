@@ -1,0 +1,23 @@
+.containerStat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background-color: #000;
+}
+
+.backProfile {
+    margin: 20px 0 100px;
+}
+
+.backProfile button {
+    background-color: transparent;
+    border: none;
+    color: #29c61e;
+    text-shadow: 4px 4px 8px #29c61e;
+    width: 100%;
+    height: 100%;
+    font-size: 1rem;
+}

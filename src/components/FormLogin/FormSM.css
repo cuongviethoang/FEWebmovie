@@ -278,6 +278,14 @@ a {
     color: #ffddf6;
 }
 
+.form-control:focus {
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;

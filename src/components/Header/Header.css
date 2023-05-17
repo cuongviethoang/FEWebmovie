@@ -42,7 +42,11 @@
 }
 
 #heading {
-    color: #f9c4fb;
+    background: linear-gradient(to bottom, #3ea6ff, #f9c4fb);
+    -webkit-background-clip: text; /* Tương thích với trình duyệt WebKit-based (Chrome, Safari) */
+    -webkit-text-fill-color: transparent; /* Tương thích với trình duyệt WebKit-based (Chrome, Safari) */
+    background-clip: text; /* Tương thích với trình duyệt không phải WebKit-based */
+    text-shadow: 5px 5px 10px #22da43;
 }
 
 a > span {
@@ -72,6 +76,7 @@ a > span:hover {
     height: 100%;
     display: flex;
     align-items: center;
+    text-shadow: 4px 4px 10px #22da43;
 }
 
 .checkColor {
